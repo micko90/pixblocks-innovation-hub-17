@@ -1,7 +1,7 @@
 
 import { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Download } from "lucide-react";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -25,6 +25,7 @@ const Navbar = () => {
     { name: 'Rozwiązania', href: '#solutions' },
     { name: 'Opinie', href: '#testimonials' },
     { name: 'Cennik', href: '#pricing' },
+    { name: 'Pobierz PixBlocks', href: '#download', icon: <Download size={16} /> },
     { name: 'Kontakt', href: '#contact' },
   ];
 
@@ -46,8 +47,9 @@ const Navbar = () => {
               <a 
                 key={link.name} 
                 href={link.href} 
-                className={`text-sm font-medium transition-colors hover:text-pixblocks-purple ${isScrolled ? 'text-pixblocks-dark' : 'text-white'}`}
+                className={`text-sm font-medium transition-colors hover:text-pixblocks-purple flex items-center gap-1 ${isScrolled ? 'text-pixblocks-dark' : 'text-white'}`}
               >
+                {link.icon && link.icon}
                 {link.name}
               </a>
             ))}
@@ -77,9 +79,10 @@ const Navbar = () => {
                 <a 
                   key={link.name} 
                   href={link.href} 
-                  className="text-pixblocks-dark text-sm font-medium transition-colors hover:text-pixblocks-purple"
+                  className="text-pixblocks-dark text-sm font-medium transition-colors hover:text-pixblocks-purple flex items-center gap-1"
                   onClick={() => setIsMenuOpen(false)}
                 >
+                  {link.icon && link.icon}
                   {link.name}
                 </a>
               ))}

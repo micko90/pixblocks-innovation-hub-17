@@ -1,6 +1,5 @@
 
-import { Monitor, Users, FileText } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Monitor, Users } from "lucide-react";
 
 const Solutions = () => {
   return (
@@ -35,7 +34,7 @@ const Solutions = () => {
         </div>
         
         {/* Mentoring Program */}
-        <div className="mb-16 bg-white rounded-xl shadow-md overflow-hidden">
+        <div className="bg-white rounded-xl shadow-md overflow-hidden">
           <div className="flex flex-col md:flex-row">
             <div className="md:order-2 md:w-2/5 bg-pixblocks-purple p-8 text-white flex items-center justify-center">
               <Users size={120} />
@@ -55,24 +54,6 @@ const Solutions = () => {
               <p className="text-gray-700 italic">
                 Dzięki udziałowi w tych sesjach na żywo nauczyciele mogą stale rozwijać swoje kompetencje i przekształcać swoje klasy w nowoczesne, innowacyjne środowiska nauki.
               </p>
-            </div>
-          </div>
-        </div>
-        
-        {/* Educational Materials */}
-        <div className="bg-white rounded-xl shadow-md overflow-hidden">
-          <div className="flex flex-col md:flex-row">
-            <div className="md:w-2/5 bg-pixblocks-purple p-8 text-white flex items-center justify-center">
-              <FileText size={120} />
-            </div>
-            <div className="md:w-3/5 p-8">
-              <h3 className="text-2xl font-bold mb-4 text-pixblocks-dark">MATERIAŁY EDUKACYJNE</h3>
-              <p className="text-gray-700 mb-6">
-                Udostępniamy szereg materiałów edukacyjnych, które wspierają proces nauczania i uczenia się programowania. Wkrótce w tym miejscu pojawią się pliki PDF do pobrania oraz nasza aplikacja.
-              </p>
-              <Button className="bg-pixblocks-purple hover:bg-purple-700">
-                Sprawdź dostępne materiały
-              </Button>
             </div>
           </div>
         </div>
