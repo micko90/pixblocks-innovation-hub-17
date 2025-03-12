@@ -1,6 +1,15 @@
 
 import { Card } from "@/components/ui/card";
 import { Quote } from "lucide-react";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
+import { useEffect, useState } from "react";
+import { cn } from "@/lib/utils";
 
 const testimonials = [
   {
@@ -21,24 +30,73 @@ const testimonials = [
 ];
 
 const Testimonials = () => {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
   return (
     <section id="testimonials" className="section-padding bg-white">
       <div className="container mx-auto px-4 md:px-6">
         <h2 className="section-title text-center mb-12">OPINIE</h2>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {testimonials.map((testimonial, index) => (
-            <Card key={index} className="p-6 h-full flex flex-col border border-gray-200 hover:shadow-lg transition-shadow">
-              <div className="mb-4 text-pixblocks-purple">
-                <Quote size={32} />
+        <div className="relative py-10">
+          <Carousel
+            opts={{
+              align: "center",
+              loop: true,
+            }}
+            className="w-full"
+            onSelect={(index) => setActiveIndex(index)}
+          >
+            <CarouselContent>
+              {testimonials.map((testimonial, index) => (
+                <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
+                  <div className="p-1">
+                    <Card className="p-6 h-full flex flex-col border border-gray-200 hover:shadow-lg transition-shadow">
+                      <div className="mb-4 text-pixblocks-purple">
+                        <Quote size={32} />
+                      </div>
+                      <p className="text-gray-700 italic mb-6 flex-grow">{testimonial.content}</p>
+                      <div>
+                        <p className="font-semibold text-pixblocks-dark">{testimonial.author}</p>
+                        <p className="text-gray-600 text-sm">{testimonial.position}</p>
+                      </div>
+                    </Card>
+                  </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            
+            <div className="flex items-center justify-center mt-8">
+              <CarouselPrevious className="relative static mr-2 bg-white border-pixblocks-purple text-pixblocks-purple hover:bg-pixblocks-purple hover:text-white" />
+              <div className="flex gap-2 mx-4">
+                {testimonials.map((_, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => document.querySelector<HTMLElement>(`.embla__slide:nth-child(${idx + 1})`)?.click()}
+                    className={cn(
+                      "w-3 h-3 rounded-full transition-all",
+                      activeIndex === idx ? "bg-pixblocks-purple" : "bg-gray-300"
+                    )}
+                    aria-label={`Go to slide ${idx + 1}`}
+                  />
+                ))}
               </div>
-              <p className="text-gray-700 italic mb-6 flex-grow">{testimonial.content}</p>
-              <div>
-                <p className="font-semibold text-pixblocks-dark">{testimonial.author}</p>
-                <p className="text-gray-600 text-sm">{testimonial.position}</p>
-              </div>
-            </Card>
-          ))}
+              <CarouselNext className="relative static ml-2 bg-white border-pixblocks-purple text-pixblocks-purple hover:bg-pixblocks-purple hover:text-white" />
+            </div>
+          </Carousel>
         </div>
       </div>
     </section>

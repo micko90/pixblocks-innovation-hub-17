@@ -46,9 +46,8 @@ const Navbar = () => {
               <a 
                 key={link.name} 
                 href={link.href} 
-                className={`text-sm font-medium transition-colors hover:text-pixblocks-purple flex items-center gap-1 ${isScrolled ? 'text-pixblocks-dark' : 'text-white'}`}
+                className={`text-sm font-medium transition-colors hover:text-pixblocks-purple ${isScrolled ? 'text-pixblocks-dark' : 'text-white'}`}
               >
-                {link.icon && link.icon}
                 {link.name}
               </a>
             ))}
@@ -87,10 +86,9 @@ const Navbar = () => {
                 <a 
                   key={link.name} 
                   href={link.href} 
-                  className="text-pixblocks-dark text-sm font-medium transition-colors hover:text-pixblocks-purple flex items-center gap-1"
+                  className="text-pixblocks-dark text-sm font-medium transition-colors hover:text-pixblocks-purple"
                   onClick={() => setIsMenuOpen(false)}
                 >
-                  {link.icon && link.icon}
                   {link.name}
                 </a>
               ))}
