@@ -25,8 +25,7 @@ const Navbar = () => {
     { name: 'Rozwiązania', href: '#solutions' },
     { name: 'Opinie', href: '#testimonials' },
     { name: 'Cennik', href: '#pricing' },
-    { name: 'Pobierz PixBlocks', href: '#download', icon: <Download size={16} /> },
-    { name: 'Kontakt', href: '#contact' },
+    // Removing 'Kontakt' from the navigation links
   ];
 
   return (
@@ -42,7 +41,7 @@ const Navbar = () => {
           </a>
 
           {/* Desktop Menu */}
-          <div className="hidden md:flex space-x-8">
+          <div className="hidden md:flex items-center space-x-8">
             {navLinks.map((link) => (
               <a 
                 key={link.name} 
@@ -53,14 +52,23 @@ const Navbar = () => {
                 {link.name}
               </a>
             ))}
-          </div>
+            
+            {/* Special styled link for 'Pobierz PixBlocks' */}
+            <a 
+              href="#download" 
+              className={`text-sm font-medium px-4 py-2 rounded-md bg-pixblocks-purple text-white hover:bg-purple-700 transition-colors flex items-center gap-1`}
+            >
+              <Download size={16} />
+              Pobierz PixBlocks
+            </a>
 
-          <Button 
-            className="hidden md:flex bg-pixblocks-yellow hover:bg-yellow-500 text-pixblocks-dark"
-            onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-          >
-            Skontaktuj się
-          </Button>
+            <Button 
+              className="bg-pixblocks-yellow hover:bg-yellow-500 text-pixblocks-dark"
+              onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+            >
+              Skontaktuj się
+            </Button>
+          </div>
 
           {/* Mobile Menu Button */}
           <button 
@@ -86,6 +94,17 @@ const Navbar = () => {
                   {link.name}
                 </a>
               ))}
+              
+              {/* Special styled link for mobile 'Pobierz PixBlocks' */}
+              <a 
+                href="#download" 
+                className="text-white text-sm font-medium bg-pixblocks-purple px-4 py-2 rounded-md hover:bg-purple-700 transition-colors flex items-center gap-1"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                <Download size={16} />
+                Pobierz PixBlocks
+              </a>
+              
               <Button 
                 className="bg-pixblocks-yellow hover:bg-yellow-500 text-pixblocks-dark w-full"
                 onClick={() => {
