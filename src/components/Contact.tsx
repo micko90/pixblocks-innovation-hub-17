@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -34,12 +35,11 @@ const Contact = () => {
     };
     
     try {
-      // Replace with your actual EmailJS service ID, template ID, and user ID
       await emailjs.send(
-        'service_youremailjs', // Your EmailJS service ID
-        'template_youremailjs', // Your EmailJS template ID
+        'service_hy37zg8', // Your EmailJS service ID
+        'template_lbmdnxf', // Your EmailJS template ID
         templateParams,
-        'user_youremailjs' // Your EmailJS user ID
+        'sbymVmdNEa2xL_lnp' // Your EmailJS user ID
       );
       
       // Success toast
