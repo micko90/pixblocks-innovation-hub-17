@@ -1,10 +1,10 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Phone, Mail } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import emailjs from 'emailjs-com';
 
 const Contact = () => {
   const { toast } = useToast();
@@ -21,25 +21,51 @@ const Contact = () => {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Simulate form submission
-    setTimeout(() => {
-      setIsSubmitting(false);
+    // Prepare EmailJS template parameters
+    const templateParams = {
+      from_name: formData.name,
+      from_email: formData.email,
+      organization: formData.organization,
+      message: formData.message,
+    };
+    
+    try {
+      // Replace with your actual EmailJS service ID, template ID, and user ID
+      await emailjs.send(
+        'service_youremailjs', // Your EmailJS service ID
+        'template_youremailjs', // Your EmailJS template ID
+        templateParams,
+        'user_youremailjs' // Your EmailJS user ID
+      );
+      
+      // Success toast
       toast({
         title: "Formularz wysłany",
         description: "Dziękujemy za kontakt. Odezwiemy się wkrótce!",
         variant: "default",
       });
+      
+      // Reset form
       setFormData({
         name: "",
         email: "",
         organization: "",
         message: ""
       });
-    }, 1500);
+    } catch (error) {
+      console.error("Error sending email:", error);
+      toast({
+        title: "Błąd wysyłania",
+        description: "Wystąpił problem podczas wysyłania wiadomości. Prosimy spróbować później.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
